@@ -11,7 +11,6 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
         title: const Text('This is app bar'),
       ),
       drawer: Drawer(),
