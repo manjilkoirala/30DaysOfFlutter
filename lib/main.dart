@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'homepage.dart';
+
 void main() {
   runApp(const Myapp());
 }
@@ -9,13 +11,6 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('This is App Bar'),
-        ),
-        body: const Center(child: Text('Hello')),
-      ),
-    );
+    return const MaterialApp(home: Homepage());
   }
 }
