@@ -31,25 +31,27 @@ class login extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
               child: Center(
                 child: TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     labelText: 'Username',
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
               child: Center(
                 child: TextField(
                   autocorrect: false,
                   obscureText: true,
                   enableSuggestions: false,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     labelText: 'Password',
                   ),
                 ),
