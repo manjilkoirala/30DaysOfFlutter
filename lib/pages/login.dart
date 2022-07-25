@@ -49,7 +49,8 @@ class Login extends StatelessWidget {
               child: Center(
                 child: TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     labelText: 'Username',
                   ),
                 ),
@@ -63,7 +64,8 @@ class Login extends StatelessWidget {
                   obscureText: true,
                   enableSuggestions: false,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     labelText: 'Password',
                   ),
                 ),
