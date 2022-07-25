@@ -8,17 +8,31 @@ class login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login Page'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+    return Material(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        child: ListView(
+          children: <Widget>[
+            // Center(
+            //     child: Text(
+            //   'Login Page',
+            //   style: TextStyle(
+            //       fontSize: 40,
+            //       fontWeight: FontWeight.bold,
+            //       color: Color.fromARGB(255, 12, 152, 216)),
+            // )),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Image.network(
+                'https://www.freepnglogos.com/uploads/logo-facebook-png/logo-facebook-facebook-logo-png-transparent-svg-vector-bie-supply-13.png',
+                width: 300,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+              child: Center(
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -26,8 +40,10 @@ class login extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+              child: Center(
                 child: TextField(
                   autocorrect: false,
                   obscureText: true,
@@ -38,23 +54,64 @@ class login extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(150, 5, 150, 5),
-                child: ElevatedButton(
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(0, 40),
+                  shape: RoundedRectangleBorder(
+                      //to set border radius to button
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Homepage()));
+                },
+                child: Text(
+                  'Log in',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+                child: Text(
+              'Forgot password?',
+              style: TextStyle(
+                  color: Color.fromARGB(150, 0, 0, 0),
+                  fontWeight: FontWeight.bold),
+            )),
+            SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: Divider(
+                thickness: 2,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(90, 2, 90, 10),
+              child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    minimumSize: Size(0, 35),
                     shape: RoundedRectangleBorder(
-                        //to set border radius to button
                         borderRadius: BorderRadius.circular(10)),
                   ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Homepage()));
-                  },
-                  child: Text('Login'),
-                ),
-              )
-            ],
-          ),
+                  onPressed: () {},
+                  child: Text(
+                    'Create new account',
+                    style: TextStyle(fontSize: 16),
+                  )),
+            )
+          ],
         ),
       ),
     );
