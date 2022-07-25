@@ -3,8 +3,17 @@ import 'package:day1/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  String name = "";
+  String pass = "";
+  String invalid = "";
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +23,9 @@ class Login extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: ListView(
           children: <Widget>[
-            // Center(
-            //     child: Text(
-            //   'Login Page',
-            //   style: TextStyle(
-            //       fontSize: 40,
-            //       fontWeight: FontWeight.bold,
-            //       color: Color.fromARGB(255, 12, 152, 216)),
-            // )),
             SizedBox(
               height: 10,
             ),
-
             Center(
               child: Image.asset(
                 'img/login.png',
@@ -42,14 +42,17 @@ class Login extends StatelessWidget {
                     color: Colors.blue),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: Center(
                 child: TextField(
+                  onChanged: (value) {
+                    name = value;
+                  },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
+                    prefixIcon: Icon(Icons.person),
                     labelText: 'Username',
                   ),
                 ),
@@ -59,10 +62,14 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: Center(
                 child: TextField(
+                  onChanged: (value) {
+                    pass = value;
+                  },
                   autocorrect: false,
                   obscureText: true,
                   enableSuggestions: false,
                   decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     labelText: 'Password',
@@ -70,11 +77,17 @@ class Login extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
+            Center(
+              child: Text(
+                invalid,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 15,
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(0, 40),
@@ -83,7 +96,12 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, MyRoutes.homeRoutes);
+                  if (name == "Manjil" && pass == "Koirala") {
+                    Navigator.pushNamed(context, MyRoutes.homeRoutes);
+                  } else {
+                    invalid = "Invalid Username*";
+                    setState(() {});
+                  }
                 },
                 child: Text(
                   'Log in',
@@ -124,7 +142,7 @@ class Login extends StatelessWidget {
                     'Create new account',
                     style: TextStyle(fontSize: 16),
                   )),
-            )
+            ),
           ],
         ),
       ),
