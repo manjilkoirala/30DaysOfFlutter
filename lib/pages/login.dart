@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'package:day1/pages/homepage.dart';
+import 'package:day1/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -84,8 +83,7 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Homepage()));
+                  Navigator.pushNamed(context, MyRoutes.homeRoutes);
                 },
                 child: Text(
                   'Log in',
@@ -113,7 +111,7 @@ class Login extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(100, 0, 100, 10),
+              padding: const EdgeInsets.fromLTRB(90, 0, 90, 10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
