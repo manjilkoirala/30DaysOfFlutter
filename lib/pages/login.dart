@@ -2,13 +2,15 @@
 
 import 'package:day1/pages/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class login extends StatelessWidget {
-  const login({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: ListView(
@@ -24,12 +26,24 @@ class login extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
+
             Center(
-              child: Image.network(
-                'https://www.freepnglogos.com/uploads/logo-facebook-png/logo-facebook-facebook-logo-png-transparent-svg-vector-bie-supply-13.png',
-                width: 300,
+              child: Image.asset(
+                'img/login.png',
+                width: 320,
               ),
             ),
+            Center(
+              child: Text(
+                'Welcome',
+                style: GoogleFonts.sacramento(
+                    fontSize: 48,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.blue),
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: Center(
@@ -91,13 +105,13 @@ class login extends StatelessWidget {
               height: 5,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
               child: Divider(
                 thickness: 2,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(90, 2, 90, 10),
+              padding: const EdgeInsets.fromLTRB(100, 0, 100, 10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
