@@ -13,7 +13,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String name = "";
   String pass = "";
-  String invalid = "";
   final _formkey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) {
@@ -26,39 +25,31 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-        child: ListView(
-          children: <Widget>[
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
             SizedBox(
               height: 10,
             ),
-            Center(
-              child: Image.asset(
-                'img/login.png',
-                width: 320,
-              ),
+            Image.asset(
+              'img/login.png',
+              width: 320,
             ),
-            Center(
-              child: Text(
-                'Welcome',
-                style: GoogleFonts.sacramento(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.blue),
-              ),
+            Text(
+              'Welcome',
+              style: GoogleFonts.sacramento(
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.blue),
             ),
             Form(
                 key: _formkey,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                   child: Column(
                     children: [
                       TextFormField(
-                        onChanged: (value) {
-                          name = value;
-                        },
                         validator: (value) {
                           if (value != "Manjil") {
                             return "Username is incorrect";
@@ -70,6 +61,7 @@ class _LoginState extends State<Login> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15)),
                           prefixIcon: Icon(Icons.person),
+                          hintText: 'Enter your username',
                           labelText: 'Username',
                         ),
                       ),
@@ -77,9 +69,6 @@ class _LoginState extends State<Login> {
                         height: 10,
                       ),
                       TextFormField(
-                        onChanged: (value) {
-                          pass = value;
-                        },
                         validator: (value) {
                           if (value != "Koirala") {
                             return "Password is incorrect";
@@ -94,42 +83,32 @@ class _LoginState extends State<Login> {
                           prefixIcon: Icon(Icons.lock),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15)),
+                          hintText: 'Enter your password',
                           labelText: 'Password',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(331.4, 40),
+                          shape: RoundedRectangleBorder(
+                              //to set border radius to button
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        onPressed: () {
+                          moveToHome(context);
+                        },
+                        child: Text(
+                          'Log in',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
                   ),
                 )),
-            Center(
-              child: Text(
-                invalid,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(0, 40),
-                  shape: RoundedRectangleBorder(
-                      //to set border radius to button
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-                onPressed: () {
-                  moveToHome(context);
-                },
-                child: Text(
-                  'Log in',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
             Center(
                 child: Text(
               'Forgot password?',
@@ -137,11 +116,8 @@ class _LoginState extends State<Login> {
                   color: Color.fromARGB(150, 0, 0, 0),
                   fontWeight: FontWeight.bold),
             )),
-            SizedBox(
-              height: 5,
-            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: Divider(
                 thickness: 2,
               ),
