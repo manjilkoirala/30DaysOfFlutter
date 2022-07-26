@@ -14,6 +14,13 @@ class _LoginState extends State<Login> {
   String name = "";
   String pass = "";
   String invalid = "";
+  final _formkey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) {
+    if (_formkey.currentState!.validate()) {
+      Navigator.pushNamed(context, MyRoutes.homeRoutes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,41 +49,57 @@ class _LoginState extends State<Login> {
                     color: Colors.blue),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) {
-                    name = value;
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    prefixIcon: Icon(Icons.person),
-                    labelText: 'Username',
+            Form(
+                key: _formkey,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        onChanged: (value) {
+                          name = value;
+                        },
+                        validator: (value) {
+                          if (value != "Manjil") {
+                            return "Username is incorrect";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          prefixIcon: Icon(Icons.person),
+                          labelText: 'Username',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        onChanged: (value) {
+                          pass = value;
+                        },
+                        validator: (value) {
+                          if (value != "Koirala") {
+                            return "Password is incorrect";
+                          } else {
+                            return null;
+                          }
+                        },
+                        autocorrect: false,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          labelText: 'Password',
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) {
-                    pass = value;
-                  },
-                  autocorrect: false,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    labelText: 'Password',
-                  ),
-                ),
-              ),
-            ),
+                )),
             Center(
               child: Text(
                 invalid,
@@ -87,7 +110,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(0, 40),
@@ -96,12 +119,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(20)),
                 ),
                 onPressed: () {
-                  if (name == "Manjil" && pass == "Koirala") {
-                    Navigator.pushNamed(context, MyRoutes.homeRoutes);
-                  } else {
-                    invalid = "Invalid Username*";
-                    setState(() {});
-                  }
+                  moveToHome(context);
                 },
                 child: Text(
                   'Log in',
