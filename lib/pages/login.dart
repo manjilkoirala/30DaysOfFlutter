@@ -13,105 +13,102 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   String name = "";
   String pass = "";
-  String invalid = "";
+  final _formkey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) {
+    if (_formkey.currentState!.validate()) {
+      Navigator.pushNamed(context, MyRoutes.homeRoutes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-        child: ListView(
-          children: <Widget>[
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
             SizedBox(
               height: 10,
             ),
-            Center(
-              child: Image.asset(
-                'img/login.png',
-                width: 320,
-              ),
+            Image.asset(
+              'img/login.png',
+              width: 320,
             ),
-            Center(
-              child: Text(
-                'Welcome',
-                style: GoogleFonts.sacramento(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.blue),
-              ),
+            Text(
+              'Welcome',
+              style: GoogleFonts.sacramento(
+                  fontSize: 48,
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.blue),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) {
-                    name = value;
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    prefixIcon: Icon(Icons.person),
-                    labelText: 'Username',
+            Form(
+                key: _formkey,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        validator: (value) {
+                          if (value != "Manjil") {
+                            return "Username is incorrect";
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          prefixIcon: Icon(Icons.person),
+                          hintText: 'Enter your username',
+                          labelText: 'Username',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value != "Koirala") {
+                            return "Password is incorrect";
+                          } else {
+                            return null;
+                          }
+                        },
+                        autocorrect: false,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(331.4, 40),
+                          shape: RoundedRectangleBorder(
+                              //to set border radius to button
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        onPressed: () {
+                          moveToHome(context);
+                        },
+                        child: Text(
+                          'Log in',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-              child: Center(
-                child: TextField(
-                  onChanged: (value) {
-                    pass = value;
-                  },
-                  autocorrect: false,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    labelText: 'Password',
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                invalid,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(0, 40),
-                  shape: RoundedRectangleBorder(
-                      //to set border radius to button
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-                onPressed: () {
-                  if (name == "Manjil" && pass == "Koirala") {
-                    Navigator.pushNamed(context, MyRoutes.homeRoutes);
-                  } else {
-                    invalid = "Invalid Username*";
-                    setState(() {});
-                  }
-                },
-                child: Text(
-                  'Log in',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
+                )),
             Center(
                 child: Text(
               'Forgot password?',
@@ -119,11 +116,8 @@ class _LoginState extends State<Login> {
                   color: Color.fromARGB(150, 0, 0, 0),
                   fontWeight: FontWeight.bold),
             )),
-            SizedBox(
-              height: 5,
-            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
               child: Divider(
                 thickness: 2,
               ),
