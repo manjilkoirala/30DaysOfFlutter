@@ -12,7 +12,7 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('This is app bar'),
+        title: const Text('Catalog App'),
       ),
       drawer: const MainDrawer(),
       body: Center(child: Text("Flutter $days $use Challenge")),
