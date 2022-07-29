@@ -1,3 +1,4 @@
+import 'package:day1/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatelessWidget {
@@ -13,7 +14,7 @@ class Homepage extends StatelessWidget {
         centerTitle: true,
         title: const Text('This is app bar'),
       ),
-      drawer: const Drawer(),
+      drawer: const MainDrawer(),
       body: Center(child: Text("Flutter $days $use Challenge")),
     );
   }
