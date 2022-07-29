@@ -14,4 +14,8 @@ class MainTheme {
               color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
         ),
       );
+
+  static ThemeData get darkTheme => ThemeData(
+        brightness: Brightness.dark,
+      );
 }
