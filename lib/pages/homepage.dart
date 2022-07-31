@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:day1/models/catalog.dart';
@@ -41,11 +43,42 @@ class _HomepageState extends State<Homepage> {
           title: const Text('Catalog App'),
         ),
         drawer: const MainDrawer(),
-        body: ListView.builder(
-          itemCount: CatalogModel.items.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(item: CatalogModel.items[index]);
-          },
-        ));
+        body: GridView.builder(
+            itemCount: CatalogModel.items.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+            ),
+            itemBuilder: (context, index) {
+              final item = CatalogModel.items[index];
+              return Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                clipBehavior: Clip.antiAlias,
+                child: GridTile(
+                  header: Container(
+                    decoration: BoxDecoration(color: Colors.blue),
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      item.name,
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  footer: Container(
+                    decoration:
+                        BoxDecoration(color: Color.fromARGB(255, 32, 46, 46)),
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      "\$${item.price.toString()}",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  child: Image.network(item.image),
+                ),
+              );
+            }));
   }
 }
