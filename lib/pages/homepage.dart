@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
-
 import 'package:day1/models/catalog.dart';
-import 'package:day1/widgets/drawer.dart';
+import 'package:day1/widgets/themes.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../widgets/items.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -38,47 +38,89 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Catalog App'),
+      backgroundColor: MainTheme.creamColor,
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [CatalogHeader(), CatalogList().expand()],
+          ),
         ),
-        drawer: const MainDrawer(),
-        body: GridView.builder(
-            itemCount: CatalogModel.items.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-            ),
-            itemBuilder: (context, index) {
-              final item = CatalogModel.items[index];
-              return Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                clipBehavior: Clip.antiAlias,
-                child: GridTile(
-                  header: Container(
-                    decoration: BoxDecoration(color: Colors.blue),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      item.name,
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
+      ),
+    );
+  }
+}
+
+//Header Part
+class CatalogHeader extends StatelessWidget {
+  const CatalogHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Catalog App',
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'Trending Products',
+          style: TextStyle(fontSize: 22),
+        )
+      ],
+    );
+  }
+}
+
+//Catalog List
+
+class CatalogList extends StatelessWidget {
+  const CatalogList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: CatalogModel.items.length,
+      itemBuilder: (context, index) {
+        final catalog = CatalogModel.items[index];
+        return CatalogItem(catalog: catalog);
+      },
+    );
+  }
+}
+
+class CatalogItem extends StatelessWidget {
+  final Item catalog;
+  const CatalogItem({Key? key, required this.catalog}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+        ),
+        height: 150,
+        width: 150,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: MainTheme.creamColor,
                   ),
-                  footer: Container(
-                    decoration:
-                        BoxDecoration(color: Color.fromARGB(255, 32, 46, 46)),
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                      "\$${item.price.toString()}",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  child: Image.network(item.image),
-                ),
-              );
-            }));
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(catalog.image)),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
